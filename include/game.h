@@ -10,3 +10,4 @@ void  GameDestroy(Game**);
 int   GameUpdate(Game*, SDL_Event*);
 
 #endif
+

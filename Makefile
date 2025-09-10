@@ -23,8 +23,8 @@ SDL2_IMAGE_LDFLAGS:=$(shell pkg-config --libs SDL2_image)
 SRCS:= \
 	main.c \
 	src/game.c \
-
-	#src/gilr.c \
+	src/loaders.c \
+	src/pipepair.c \
 
 OBJS:=$(SRCS:.c=.o)
 DEPS:=$(SRCS:.c=.d)
