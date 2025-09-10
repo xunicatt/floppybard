@@ -1,0 +1,7 @@
+.cache/
+
+floppybard
+compile_commands.json
+
+*.o
+*.d

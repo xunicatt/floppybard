@@ -1,0 +1,64 @@
+TARGET:=floppybard
+CC:=gcc
+CSTD:=-std=c23
+
+CFLAGS:= \
+	-Wall \
+	-Werror \
+	-Wextra \
+	-Iinclude \
+	-O3 \
+
+LDFLAGS:= \
+
+SDL2_CFLAGS:=$(shell pkg-config --cflags sdl2)
+SDL2_LDFLAGS:=$(shell pkg-config --libs sdl2)
+
+SDL2_TTF_CFLAGS:=$(shell pkg-config --cflags SDL2_ttf)
+SDL2_TTF_LDFLAGS:=$(shell pkg-config --libs SDL2_ttf)
+
+SDL2_IMAGE_CFLAGS:=$(shell pkg-config --cflags SDL2_image)
+SDL2_IMAGE_LDFLAGS:=$(shell pkg-config --libs SDL2_image)
+
+SRCS:= \
+	main.c \
+	src/game.c \
+
+	#src/gilr.c \
+
+OBJS:=$(SRCS:.c=.o)
+DEPS:=$(SRCS:.c=.d)
+
+CFLAGS:= \
+	$(CFLAGS) \
+	$(SDL2_CFLAGS) \
+	$(SDL2_TTF_CFLAGS) \
+	$(SDL2_IMAGE_CFLAGS) \
+	$(CSTD) \
+
+LDFLAGS:= \
+	$(LDFLAGS) \
+	$(SDL2_LDFLAGS) \
+	$(SDL2_TTF_LDFLAGS) \
+	$(SDL2_IMAGE_LDFLAGS) \
+
+.PHONY: all run clean
+
+%.o: %.c
+	@echo "Compiling: $< ->$@"
+	@$(CC) $(CFLAGS) -c -o $@ $< -MD
+
+$(TARGET): $(OBJS)
+	@echo "Linking: $@"
+	@$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ -MD
+
+all: $(TARGET)
+
+run: $(TARGET)
+	@./$(TARGET)
+
+clean:
+	@rm -f $(TARGET) $(OBJS) $(DEPS)
+	@echo "Cleaned"
+
+-include $(DEPS)
