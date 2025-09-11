@@ -9,6 +9,7 @@ CFLAGS:= \
 	-Iinclude \
 	-O3 \
 
+
 LDFLAGS:= \
 
 # sdl2

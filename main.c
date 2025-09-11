@@ -25,9 +25,9 @@ int main(void) {
   }
 
   ret = IMG_Init(IMG_INIT_PNG);
-  if (ret < 0) {
+  if ((ret & IMG_INIT_PNG) == 0) {
     LOG_ERROR("failed to initialize IMG: %s", SDL_GetError());
-    TTF_Init();
+    TTF_Quit();
     SDL_Quit();
     return -1;
   }

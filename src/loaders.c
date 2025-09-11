@@ -50,7 +50,7 @@ SDL_Texture* const* LoadTextures(SDL_Renderer* renderer) {
 
 cleanup:
   while (i-- > 0)
-    SDL_DestroyTexture(textures[i - 1]);
+    SDL_DestroyTexture(textures[i]);
   return NULL;
 }
 
