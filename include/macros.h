@@ -7,7 +7,7 @@
 #define HEIGHT          (600)
 #define PIPES           (3)
 #define PIPE_MAX_OFFSET (70)
-#define HGAP            (250)
+#define HGAP            (150)
 #define VGAP            (100)
 #define PIPE_HEIGHT     (320)
 #define PIPE_WIDTH      (52)
