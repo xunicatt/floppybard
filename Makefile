@@ -1,6 +1,6 @@
 TARGET:=floppybard
 CC:=gcc
-CSTD:=-std=c23
+CSTD:=-std=c99
 
 CFLAGS:= \
 	-Wall \
