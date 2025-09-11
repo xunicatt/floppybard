@@ -61,6 +61,7 @@ int main(void) {
   bool quit = false;
   while (!quit) {
     while (SDL_PollEvent(&event)) {
+      /* quit if ESC key is pressed */
       if (event.type == SDL_QUIT || 
           (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) {
         quit = true;

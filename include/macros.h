@@ -3,15 +3,16 @@
 
 #include <stdio.h>
 
-#define WIDTH           (300)
-#define HEIGHT          (600)
-#define PIPES           (3)
-#define PIPE_MAX_OFFSET (70)
-#define HGAP            (150)
-#define VGAP            (100)
-#define PIPE_HEIGHT     (320)
-#define PIPE_WIDTH      (52)
+#define WIDTH           (300) /* Window Width */
+#define HEIGHT          (600) /* Window Height */
+#define PIPES           (3)   /* Number of Pipes */
+#define PIPE_MAX_OFFSET (70)  /* Max offset for yPos */
+#define HGAP            (150) /* Horizontal gap between Pipes */
+#define VGAP            (100) /* Vertical gap between Pipes */
+#define PIPE_HEIGHT     (320) /* Pipe Height */
+#define PIPE_WIDTH      (52)  /* Pipe Width */
 
+/* Helper macro to print Log Messages */
 #define LOG_ERROR(...)                                                         \
 do {                                                                           \
   fprintf(stderr, "error: ");                                                  \
@@ -21,6 +22,9 @@ do {                                                                           \
 
 #define MAX(a, b) ((a > b) ? (a) : (b))
 #define MIN(a, b) ((a < b) ? (a) : (b))
+
+/* Helper macro to mark unused function args
+*  and silent warnings */
 #define ARG_UNUSED(x) ((void)(x))
 
 #endif

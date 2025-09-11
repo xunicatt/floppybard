@@ -11,22 +11,28 @@ CFLAGS:= \
 
 LDFLAGS:= \
 
+# sdl2
 SDL2_CFLAGS:=$(shell pkg-config --cflags sdl2)
 SDL2_LDFLAGS:=$(shell pkg-config --libs sdl2)
 
+# sdl2_ttf
 SDL2_TTF_CFLAGS:=$(shell pkg-config --cflags SDL2_ttf)
 SDL2_TTF_LDFLAGS:=$(shell pkg-config --libs SDL2_ttf)
 
+# sdl2_image
 SDL2_IMAGE_CFLAGS:=$(shell pkg-config --cflags SDL2_image)
 SDL2_IMAGE_LDFLAGS:=$(shell pkg-config --libs SDL2_image)
 
+# source files
 SRCS:= \
 	main.c \
 	src/game.c \
 	src/loaders.c \
 	src/pipepair.c \
 
+# objs generated from source files
 OBJS:=$(SRCS:.c=.o)
+# deps generated from source files
 DEPS:=$(SRCS:.c=.d)
 
 CFLAGS:= \

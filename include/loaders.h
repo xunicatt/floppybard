@@ -3,6 +3,8 @@
 
 #include <SDL.h>
 
+/* Textures enum to index Texture
+ * array returned by LoadTextures */
 typedef enum {
   TextureZero = 0,
   TextureOne,

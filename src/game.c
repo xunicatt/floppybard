@@ -19,6 +19,7 @@ Game* GameCreate(SDL_Renderer* renderer) {
   if (!textures)
     return NULL;
 
+  /* seed for random generator */
   srand(time(NULL));
 
   Game* game = malloc(sizeof(*game));
@@ -28,6 +29,8 @@ Game* GameCreate(SDL_Renderer* renderer) {
     .Pipes    = {},
   };
 
+  /* initializing pipes starting from
+   * center of the screen */
   int xPos = WIDTH / 2;
   for (size_t i = 0; i < PIPES; i++) {
     PipePairSpawn(&game->Pipes[i], xPos);
@@ -56,6 +59,7 @@ int GameUpdate(Game* game, SDL_Event* event) {
     .h = HEIGHT
   };
 
+  /* Background Day */
   ret = SDL_RenderCopy(
     game->Renderer,
     game->Textures[TextureBackgroundDay],
@@ -69,7 +73,13 @@ int GameUpdate(Game* game, SDL_Event* event) {
 
   for (size_t i = 0; i < PIPES; i++) {
     PipePair* pp = &game->Pipes[i];
+    /* if i == 0, then we lookup the last
+     *  pipe in the pipes array,
+     *  i.e, PIPES - 1 for 0 else i - 1 */
     const size_t lookup = i == 0 ? PIPES - 1 : i - 1;
+
+    /* wait for the Pipe to go smoothly
+      * out the window */
     if (pp->xPos <= -(PIPE_WIDTH)) {
       PipePairSpawn(
         pp,
@@ -82,6 +92,7 @@ int GameUpdate(Game* game, SDL_Event* event) {
   }
 
   SDL_RenderPresent(game->Renderer);
+  /* 10 ms */
   usleep(10 * 1000);
   return ret;
 }

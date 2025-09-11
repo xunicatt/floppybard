@@ -3,6 +3,11 @@
 #include <unistd.h>
 
 void PipePairSpawn(PipePair* pp, int xPos) {
+  /* -70 to 0 */
+  /* 70 is calculated from: 
+  *   (2 * 320)[Two Pipes] + 100 [VGap between them] - (600)[Window Height]
+  *     = 140
+  *   So either way we have 140/2 or 70 pixels to offset */
   const int offset = (rand() % PIPE_MAX_OFFSET) - PIPE_MAX_OFFSET;
     
   pp->TopPipePos = offset;
@@ -26,6 +31,7 @@ int PipePairDraw(const PipePair* pp, SDL_Renderer* renderer, SDL_Texture* pipeTe
     .w = PIPE_WIDTH,
   };
 
+  /* 180 deg rotation of pipe texture */
   ret = SDL_RenderCopyEx(
     renderer,
     pipeTexture,
@@ -55,6 +61,7 @@ int PipePairDraw(const PipePair* pp, SDL_Renderer* renderer, SDL_Texture* pipeTe
 }
 
 void PipePairMove(PipePair* pp) {
+  /* move from right to left */
   pp->xPos--;
 }
 
