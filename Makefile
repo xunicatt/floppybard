@@ -26,9 +26,10 @@ SDL2_IMAGE_LDFLAGS:=$(shell pkg-config --libs SDL2_image)
 # source files
 SRCS:= \
 	main.c \
-	src/game.c \
 	src/loaders.c \
 	src/pipepair.c \
+	src/base.c \
+	src/game.c \
 
 # objs generated from source files
 OBJS:=$(SRCS:.c=.o)

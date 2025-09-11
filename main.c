@@ -3,6 +3,7 @@
 #include <SDL2/SDL_image.h>
 #include <game.h>
 #include <macros.h>
+#include <configs.h>
 
 int main(void) {
   int ret = 0;
@@ -34,8 +35,8 @@ int main(void) {
     "floppy bard",
     SDL_WINDOWPOS_UNDEFINED,
     SDL_WINDOWPOS_UNDEFINED,
-    WIDTH,
-    HEIGHT,
+    WINDOW_WIDTH,
+    WINDOW_HEIGHT,
     SDL_WINDOW_SHOWN 
   );
   if (!window) {

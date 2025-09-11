@@ -1,31 +1,27 @@
 #include <pipepair.h>
-#include <macros.h>
 #include <unistd.h>
+#include <configs.h>
+#include <macros.h>
 
-void PipePairSpawn(PipePair* pp, int xPos) {
-  /* -70 to 0 */
-  /* 70 is calculated from: 
-  *   (2 * 320)[Two Pipes] + 100 [VGap between them] - (600)[Window Height]
-  *     = 140
-  *   So either way we have 140/2 or 70 pixels to offset */
+void PipePairSpawn(PipePair* pp, const int xPos) {
   const int offset = (rand() % PIPE_MAX_OFFSET) - PIPE_MAX_OFFSET;
     
   pp->TopPipePos = offset;
   pp->BottomPipePos = pp->TopPipePos + PIPE_HEIGHT + VGAP;
-  pp->xPos = xPos;
+  pp->XPos = xPos;
 }
 
 int PipePairDraw(const PipePair* pp, SDL_Renderer* renderer, SDL_Texture* pipeTexture) {
   int ret = 0;
   const struct SDL_Rect pipeTop = {
-    .x = pp->xPos,
+    .x = pp->XPos,
     .y = pp->TopPipePos,
     .h = PIPE_HEIGHT,
     .w = PIPE_WIDTH,
   };
 
   const struct SDL_Rect pipeBottom = {
-    .x = pp->xPos,
+    .x = pp->XPos,
     .y = pp->BottomPipePos,
     .h = PIPE_HEIGHT,
     .w = PIPE_WIDTH,
@@ -62,6 +58,6 @@ int PipePairDraw(const PipePair* pp, SDL_Renderer* renderer, SDL_Texture* pipeTe
 
 void PipePairMove(PipePair* pp) {
   /* move from right to left */
-  pp->xPos--;
+  pp->XPos--;
 }
 
