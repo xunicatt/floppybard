@@ -17,3 +17,7 @@ The game supports dynamic scaling, allowing it to adapt to different window size
 ```sh
 make run
 ```
+
+## Assets
+Assets are taken from [here](https://github.com/samuelcust/flappy-bird-assets.git).
+

@@ -28,3 +28,4 @@ void BaseMove(Base* b) {
   /* move from right to left */
   b->XPos--;
 }
+
