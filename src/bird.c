@@ -30,11 +30,11 @@ int BirdDraw(Bird* b, SDL_Renderer* renderer, SDL_Texture* birdTexture) {
 
 void BirdMove(Bird* b) {
   if (b->YPos != b->FutureYPos) {
-    b->YPos -= 5;
+    b->YPos -= BIRD_ACCELERATION;
     return;
   }
 
-  b->YPos += 1;
+  b->YPos += BIRD_DEACCELERATION;
   b->FutureYPos = b->YPos;
 }
 

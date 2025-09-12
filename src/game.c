@@ -31,7 +31,7 @@ Game* GameCreate(SDL_Renderer* renderer) {
 
   /* initializing pipes starting from
    * center of the screen */
-  int xPos = WIDTH / 2;
+  int xPos = WIDTH;
   for (size_t i = 0; i < PIPES; i++) {
     PipePairSpawn(&game->Pipes[i], xPos);
     xPos += HGAP;
