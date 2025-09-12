@@ -10,13 +10,7 @@
 #include <pipepair.h>
 #include <base.h>
 #include <configs.h>
-
-struct Game {
-  SDL_Renderer*       Renderer;
-  SDL_Texture* const* Textures;
-  PipePair            Pipes[PIPES];
-  Base                Bases[BASES];
-};
+#include <bird.h>
 
 Game* GameCreate(SDL_Renderer* renderer) {
   SDL_Texture* const* textures = LoadTextures(renderer);
@@ -32,6 +26,7 @@ Game* GameCreate(SDL_Renderer* renderer) {
     .Textures = textures,
     .Pipes    = {},
     .Bases    = {},
+    .Start    = false,
   };
 
   /* initializing pipes starting from
@@ -48,6 +43,8 @@ Game* GameCreate(SDL_Renderer* renderer) {
     xPos += BASE_WIDTH; 
   }
 
+  BirdSpawn(&game->Bird);
+
   return game;
 }
 
@@ -63,8 +60,7 @@ void GameDestroy(Game** pGame) {
   *pGame = NULL;
 }
 
-int GameUpdate(Game* game, SDL_Event* event) {
-  ARG_UNUSED(event);
+int GameUpdate(Game* game) {
   int ret = 0;
   const SDL_Rect bgRect = { 
     .x = 0, 
@@ -102,7 +98,9 @@ int GameUpdate(Game* game, SDL_Event* event) {
     }
 
     PipePairDraw(pp, game->Renderer, game->Textures[TexturePipeGreen]);
-    PipePairMove(pp);
+    if (game->Start) {
+      PipePairMove(pp);
+    }
   }
 
   for (size_t i = 0; i < BASES; i++) {
@@ -122,7 +120,18 @@ int GameUpdate(Game* game, SDL_Event* event) {
     }
     
     BaseDraw(b, game->Renderer, game->Textures[TextureBase]);
-    BaseMove(b);
+    if (game->Start) {
+      BaseMove(b);
+    }
+  }
+  
+  BirdDraw(
+    &game->Bird,
+    game->Renderer,
+    game->Textures[TextureYellowBirdMidFlap]
+  );
+  if (game->Start) {
+    BirdMove(&game->Bird);
   }
 
   SDL_RenderPresent(game->Renderer);

@@ -9,7 +9,6 @@ CFLAGS:= \
 	-Iinclude \
 	-O3 \
 
-
 LDFLAGS:= \
 
 # sdl2
@@ -30,6 +29,7 @@ SRCS:= \
 	src/loaders.c \
 	src/pipepair.c \
 	src/base.c \
+	src/bird.c \
 	src/game.c \
 
 # objs generated from source files

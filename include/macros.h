@@ -2,6 +2,7 @@
 #define MACROS_H_
 
 #include <stdio.h>
+#include <SDL.h>
 
 /* Helper macro to print Log Messages */
 #define LOG_ERROR(...)                                                         \
@@ -10,6 +11,18 @@ do {                                                                           \
   fprintf(stderr, __VA_ARGS__);                                                \
   fprintf(stderr, "\n");                                                       \
 } while(0)                                                                     \
+
+/* Helper macro to center a box */
+#define SDL_RECT_FROM_CENTER(_x, _y, _w, _h)                                   \
+(SDL_Rect){                                                                    \
+  .x = ((_x) - ((_w)/2)),                                                      \
+  .y = ((_y) - ((_h)/2)),                                                      \
+  .w = (_w),                                                                   \
+  .h = (_h)                                                                    \
+}                                                                              \
+
+#define IS_KEYDOWN(e, k) \
+      ((e)->key.type == SDL_KEYDOWN && (e)->key.keysym.sym == (k))
 
 #define MAX(a, b) ((a > b) ? (a) : (b))
 #define MIN(a, b) ((a < b) ? (a) : (b))

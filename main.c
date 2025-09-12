@@ -5,6 +5,7 @@
 #include <game.h>
 #include <macros.h>
 #include <configs.h>
+#include <bird.h>
 
 int main(void) {
   int ret = 0;
@@ -64,13 +65,19 @@ int main(void) {
   while (!quit) {
     while (SDL_PollEvent(&event)) {
       /* quit if ESC key is pressed */
-      if (event.type == SDL_QUIT || 
-          (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) {
+      if (event.type == SDL_QUIT || IS_KEYDOWN(&event, SDLK_ESCAPE)) {
         quit = true;
+      }
+
+      if (IS_KEYDOWN(&event, SDLK_SPACE)) {
+        if (!game->Start) {
+          game->Start = true;
+        }
+        BirdFlight(&game->Bird);
       }
     }
 
-    ret = GameUpdate(game, &event);
+    ret = GameUpdate(game);
     if (ret < 0) {
       LOG_ERROR("failed to update game");
       quit = true;
