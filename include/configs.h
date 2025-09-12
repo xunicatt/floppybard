@@ -2,7 +2,7 @@
 #define CONFIGS_H_
 
 #define WIDTH               (300)                                       /* Window Width */
-#define HEIGHT              (601)                                       /* Pipe Area Height */
+#define HEIGHT              (600)                                       /* Pipe Area Height */
 #define PIPES               (3)                                         /* Number of Pipes */
 #define HGAP                (150)                                       /* Horizontal gap between Pipes */
 #define VGAP                (100)                                       /* Vertical gap between Pipes */
