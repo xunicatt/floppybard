@@ -69,7 +69,7 @@ int main(void) {
         quit = true;
       }
 
-      if (IS_KEYDOWN(&event, SDLK_SPACE)) {
+      if (IS_KEYDOWN(&event, SDLK_SPACE) || IS_BUTTONDOWN(&event, SDL_BUTTON_LEFT)) {
         if (!game->Start) {
           game->Start = true;
         }

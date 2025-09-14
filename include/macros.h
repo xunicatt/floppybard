@@ -21,8 +21,13 @@ do {                                                                           \
   .h = (_h)                                                                    \
 }                                                                              \
 
+#define LOOKUP(x, mx) (((x) + (mx) - 1) % (mx))
+
 #define IS_KEYDOWN(e, k) \
       ((e)->key.type == SDL_KEYDOWN && (e)->key.keysym.sym == (k))
+
+#define IS_BUTTONDOWN(e, k) \
+      ((e)->button.type == SDL_MOUSEBUTTONUP && (e)->button.button == (k))
 
 #define MAX(a, b) ((a > b) ? (a) : (b))
 #define MIN(a, b) ((a < b) ? (a) : (b))

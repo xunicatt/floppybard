@@ -4,9 +4,10 @@
 #include <SDL.h>
 
 typedef enum {
-  BirdFlagDown = 0,
-  BirdFlagMid,
-  BridFlagUp,
+  BirdFlapDown = 0,
+  BirdFlapMid,
+  BridFlapUp,
+  _BirdFlapCount_,
 } BirdFlap;
 
 typedef struct {
@@ -14,6 +15,7 @@ typedef struct {
   int FutureYPos;
   int YPos;
   int FlyDuration;
+  int FlapDuation;
 } Bird;
 
 void BirdSpawn(Bird*);

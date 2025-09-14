@@ -86,7 +86,7 @@ int GameUpdate(Game* game) {
     /* if i == 0, then we lookup the last
      *  pipe in the pipes array,
      *  i.e, PIPES - 1 for 0 else i - 1 */
-    const size_t lookup = (i + PIPES - 1) % PIPES;
+    const size_t lookup = LOOKUP(i, PIPES);
 
     /* wait for the Pipe to go smoothly
       * out the window */
@@ -111,7 +111,7 @@ int GameUpdate(Game* game) {
     /* if i == 0, then we lookup the last
      *  base in the bases array,
      *  i.e, BASES - 1 for 0 else i - 1 */
-    const size_t lookup = (i + BASES - 1) % BASES;
+    const size_t lookup = LOOKUP(i, BASES);
     const int prevBaseXPos = game->Bases[lookup].XPos;
 
     /* if pos + BASE_WIDTH < WIDTH 
@@ -128,10 +128,20 @@ int GameUpdate(Game* game) {
     }
   }
   
+
+  /* Next flap */
+  if (game->Bird.FlapDuation >= BIRD_MAX_FLAP_DURATION) {
+    game->Bird.Flap = LOOKUP(game->Bird.Flap, _BirdFlapCount_);
+    game->Bird.FlapDuation = 0;
+  }
+    
+  game->Bird.FlapDuation++;
+
   BirdDraw(
     &game->Bird,
     game->Renderer,
-    game->Textures[TextureYellowBirdMidFlap]
+    /* Cycles through different flaps */
+    game->Textures[TextureYellowBirdDownFlap + game->Bird.Flap]
   );
   if (game->Start) {
     BirdMove(&game->Bird);
@@ -139,7 +149,7 @@ int GameUpdate(Game* game) {
 
   SDL_RenderPresent(game->Renderer);
   /* 10 ms */
-  usleep(8 * 1000);
+  usleep(10 * 1000);
   return ret;
 }
 

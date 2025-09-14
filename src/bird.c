@@ -5,8 +5,9 @@
 void BirdSpawn(Bird* b) {
   b->YPos = HEIGHT / 2;
   b->FutureYPos = b->YPos;
-  b->Flap = BirdFlagMid;
+  b->Flap = BirdFlapDown;
   b->FlyDuration = BIRD_MAX_FLY_DURATION;
+  b->FlapDuation = 0;
 }
 
 int BirdDraw(Bird* b, SDL_Renderer* renderer, SDL_Texture* birdTexture) {
@@ -18,14 +19,18 @@ int BirdDraw(Bird* b, SDL_Renderer* renderer, SDL_Texture* birdTexture) {
     50,
     50
   );
+  
+  /* converts 0 .. Height into -90 to 90 range */
+  const double angle = (
+    (b->YPos / (double)HEIGHT) * (BIRD_MAX_DOWN_TILT - BIRD_MAX_UP_TILT)
+  ) + BIRD_MAX_UP_TILT; 
 
   ret = SDL_RenderCopyEx(
     renderer,
     birdTexture,
     NULL,
     &box,
-    /* b->YPos != b->FutureYPos ? -45 : 90, */
-    0,
+    angle,
     NULL,
     SDL_FLIP_NONE
   );
