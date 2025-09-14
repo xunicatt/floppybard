@@ -97,6 +97,7 @@ int GameUpdate(Game* game) {
       );
     }
 
+    /* draw pipes only when they are inside the window */
     if (pp->XPos >= -(PIPE_WIDTH) && pp->XPos <= WIDTH) {
       PipePairDraw(pp, game->Renderer, game->Textures[TexturePipeGreen]);
     }
@@ -147,9 +148,6 @@ int GameUpdate(Game* game) {
     BirdMove(&game->Bird);
   }
 
-  SDL_RenderPresent(game->Renderer);
-  /* 10 ms */
-  usleep(10 * 1000);
   return ret;
 }
 

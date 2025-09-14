@@ -49,12 +49,18 @@ void BirdMove(Bird* b) {
     return;
   }
 
-  b->YPos += BIRD_DEACCELERATION;
-  b->FutureYPos = b->YPos;
+  /* dont under shoot the bird to earth's core*/
+  if (b->YPos < (HEIGHT - BIRD_DEACCELERATION)) {
+    b->YPos += BIRD_DEACCELERATION;
+    b->FutureYPos = b->YPos;
+  }
 }
 
 void BirdFlight(Bird* b) {
-  b->FutureYPos -= BIRD_JUMP_OFFSET;
+  /* dont over shoot the bird to moon */
+  if (b->FutureYPos > BIRD_JUMP_OFFSET) {
+    b->FutureYPos -= BIRD_JUMP_OFFSET;
+  }
   b->FlyDuration = 0;
 }
 

@@ -82,6 +82,10 @@ int main(void) {
       LOG_ERROR("failed to update game");
       quit = true;
     }
+
+
+    SDL_RenderPresent(game->Renderer);
+    SDL_Delay(10); /* 10 ms */
   }
 
   GameDestroy(&game);

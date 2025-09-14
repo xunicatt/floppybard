@@ -15,10 +15,10 @@
 #define BIRD_JUMP_OFFSET       (80)                                        /* Max jump offset */
 #define BIRD_ACCELERATION      (3)                                         /* Bird Acceleration 10px/10ms */
 #define BIRD_DEACCELERATION    (2)                                         /* Bird Deacceleration 3px/10ms */
-#define BIRD_MAX_FLY_DURATION  (30)
-#define BIRD_MAX_UP_TILT       (-90)
-#define BIRD_MAX_DOWN_TILT     (90)
-#define BIRD_MAX_FLAP_DURATION (15)
+#define BIRD_MAX_FLY_DURATION  (30)                                        /* Max fly duration after achieving yPos == futurePos */
+#define BIRD_MAX_UP_TILT       (-90)                                       /* Max tilt angle when flying up */
+#define BIRD_MAX_DOWN_TILT     (90)                                        /* Max tilt angle when flying down */
+#define BIRD_MAX_FLAP_DURATION (15)                                        /* Max time in ms after bird changes flaps */
 #define WINDOW_WIDTH           WIDTH                                       /* Final Window Width */
 #define WINDOW_HEIGHT          (HEIGHT + BASE_HEIGHT)                      /* Final Window Height */
 
