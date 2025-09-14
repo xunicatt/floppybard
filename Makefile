@@ -8,6 +8,7 @@ CFLAGS:= \
 	-Wextra \
 	-Iinclude \
 	-O3 \
+	--analyzer \
 
 LDFLAGS:= \
 

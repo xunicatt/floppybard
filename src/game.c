@@ -21,6 +21,9 @@ Game* GameCreate(SDL_Renderer* renderer) {
   srand(time(NULL));
 
   Game* game = malloc(sizeof(*game));
+  if (!game)
+    return NULL;
+
   *game = (Game){
     .Renderer = renderer,
     .Textures = textures,
