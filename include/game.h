@@ -15,7 +15,7 @@ typedef struct {
   Base                Bases[BASES];
   Bird                Bird;
   bool Start;
-} Game ;
+} Game;
 
 Game* GameCreate(SDL_Renderer*);
 void  GameDestroy(Game**);

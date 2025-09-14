@@ -6,6 +6,7 @@ void BirdSpawn(Bird* b) {
   b->YPos = HEIGHT / 2;
   b->FutureYPos = b->YPos;
   b->Flap = BirdFlagMid;
+  b->FlyDuration = BIRD_MAX_FLY_DURATION;
 }
 
 int BirdDraw(Bird* b, SDL_Renderer* renderer, SDL_Texture* birdTexture) {
@@ -18,19 +19,28 @@ int BirdDraw(Bird* b, SDL_Renderer* renderer, SDL_Texture* birdTexture) {
     50
   );
 
-  ret = SDL_RenderCopy(
+  ret = SDL_RenderCopyEx(
     renderer,
     birdTexture,
     NULL,
-    &box
+    &box,
+    /* b->YPos != b->FutureYPos ? -45 : 90, */
+    0,
+    NULL,
+    SDL_FLIP_NONE
   );
-
+    
   return ret;
 }
 
 void BirdMove(Bird* b) {
-  if (b->YPos != b->FutureYPos) {
+  if (b->YPos > b->FutureYPos) {
     b->YPos -= BIRD_ACCELERATION;
+    return;
+  }
+  
+  if (b->YPos >= b->FutureYPos && b->FlyDuration < BIRD_MAX_FLY_DURATION) {
+    b->FlyDuration++;
     return;
   }
 
@@ -39,9 +49,7 @@ void BirdMove(Bird* b) {
 }
 
 void BirdFlight(Bird* b) {
-  if (b->FutureYPos !=  b->YPos) {
-    b->FutureYPos = b->YPos;
-  }
-
   b->FutureYPos -= BIRD_JUMP_OFFSET;
+  b->FlyDuration = 0;
 }
+

@@ -53,7 +53,7 @@ LDFLAGS:= \
 .PHONY: all run clean
 
 %.o: %.c
-	@echo "Compiling: $< ->$@"
+	@echo "Compiling: $< -> $@"
 	@$(CC) $(CFLAGS) -c -o $@ $< -MD
 
 $(TARGET): $(OBJS)

@@ -97,7 +97,10 @@ int GameUpdate(Game* game) {
       );
     }
 
-    PipePairDraw(pp, game->Renderer, game->Textures[TexturePipeGreen]);
+    if (pp->XPos >= -(PIPE_WIDTH) && pp->XPos <= WIDTH) {
+      PipePairDraw(pp, game->Renderer, game->Textures[TexturePipeGreen]);
+    }
+
     if (game->Start) {
       PipePairMove(pp);
     }
@@ -136,7 +139,7 @@ int GameUpdate(Game* game) {
 
   SDL_RenderPresent(game->Renderer);
   /* 10 ms */
-  usleep(10 * 1000);
+  usleep(8 * 1000);
   return ret;
 }
 

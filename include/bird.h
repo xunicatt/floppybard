@@ -13,6 +13,7 @@ typedef struct {
   BirdFlap Flap;
   int FutureYPos;
   int YPos;
+  int FlyDuration;
 } Bird;
 
 void BirdSpawn(Bird*);
